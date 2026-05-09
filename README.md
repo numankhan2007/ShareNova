@@ -6,7 +6,7 @@
 <br/>
 
 <!-- Animated Typing SVG -->
-<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=22&duration=3000&pause=1000&color=8B5CF6&center=true&vCenter=true&multiline=true&repeat=true&random=false&width=600&height=80&lines=Share+files+with+a+12-digit+code+%F0%9F%94%90;No+accounts.+No+public+links.+Just+privacy.+%E2%9C%A8;Everything+auto-expires.+Zero+traces.+%F0%9F%92%A8" alt="Typing SVG" /></a>
+<a href="https://git.io/typing-svg"><img src="https://readme-typing-svg.demolab.com?font=Inter&weight=600&size=22&duration=3000&pause=1000&color=8B5CF6&center=true&vCenter=true&multiline=false&repeat=true&random=false&width=600&height=45&lines=Share+files+with+a+12-digit+code+%F0%9F%94%90;No+accounts.+No+public+links.+Just+privacy.+%E2%9C%A8;Everything+auto-expires.+Zero+traces.+%F0%9F%92%A8" alt="Typing SVG" /></a>
 
 <br/>
 
