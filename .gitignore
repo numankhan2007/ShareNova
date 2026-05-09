@@ -1,19 +1,20 @@
 # ─── Dependencies ────────────────────────────────────────
 node_modules/
-.pnp
-.pnp.js
+__pycache__/
+*.pyc
+venv/
+.venv/
 
 # ─── Build output ────────────────────────────────────────
 dist/
 build/
-.next/
-out/
 
-# ─── Environment ─────────────────────────────────────────
+# ─── Environment (NEVER commit secrets) ─────────────────
 .env
 .env.local
 .env.*.local
 backend/.env
+frontend/.env
 
 # ─── IDE ─────────────────────────────────────────────────
 .vscode/
@@ -36,16 +37,10 @@ yarn-error.log*
 coverage/
 .nyc_output/
 
-# ─── Prisma ──────────────────────────────────────────────
-# Keep schema, ignore generated client
-backend/node_modules/.prisma/
-
-# ─── TypeScript ──────────────────────────────────────────
-*.tsbuildinfo
-
-# ─── Next.js ─────────────────────────────────────────────
-frontend/.next/
-frontend/out/
+# ─── Python ──────────────────────────────────────────────
+*.egg-info/
+*.egg
+.eggs/
 
 # ─── Misc ────────────────────────────────────────────────
 *.pid
