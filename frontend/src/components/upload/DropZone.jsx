@@ -54,19 +54,19 @@ export default function DropZone({ files, onFilesChange }) {
         onDragOver={handleDragOver}
         onDragLeave={handleDragLeave}
         animate={{
-          borderColor: isDragOver ? 'rgba(139, 92, 246, 0.4)' : 'rgba(255, 255, 255, 0.06)',
-          backgroundColor: isDragOver ? 'rgba(139, 92, 246, 0.05)' : 'rgba(255, 255, 255, 0.02)',
+          borderColor: isDragOver ? 'var(--accent-ring)' : 'var(--border-subtle)',
+          backgroundColor: isDragOver ? 'var(--accent-surface)' : 'var(--surface-1)',
         }}
-        className="flex flex-col items-center justify-center gap-4 p-10 rounded-2xl border-2 border-dashed cursor-pointer transition-all hover:border-white/[0.12]"
+        className="flex flex-col items-center justify-center gap-4 p-10 rounded-2xl border-2 border-dashed cursor-pointer transition-all hover:border-(--border-strong)"
       >
-        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 flex items-center justify-center">
-          <Upload className="w-6 h-6 text-violet-400" />
+        <div className="w-14 h-14 rounded-2xl bg-gradient-to-br from-orange-500/10 to-amber-500/10 flex items-center justify-center">
+          <Upload className="w-6 h-6 text-orange-400" />
         </div>
         <div className="text-center">
-          <p className="text-sm font-medium text-white/80">
-            Drop files here or <span className="text-violet-400">browse</span>
+          <p className="text-sm font-medium text-(--text-secondary)">
+            Drop files here or <span className="text-orange-400">browse</span>
           </p>
-          <p className="text-xs text-white/40 mt-1">
+          <p className="text-xs text-(--text-dim) mt-1">
             Up to {MAX_FILES} files · Max {formatBytes(MAX_UPLOAD_SIZE)} total
           </p>
         </div>
@@ -85,14 +85,14 @@ export default function DropZone({ files, onFilesChange }) {
               key={`${file.name}-${i}`}
               initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              className="flex items-center gap-3 p-3 rounded-xl bg-white/[0.03] border border-white/[0.06]"
+              className="flex items-center gap-3 p-3 rounded-xl bg-(--surface-1) border border-(--border-subtle)"
             >
-              <FileIcon className="w-4 h-4 text-violet-400 shrink-0" />
-              <span className="text-sm text-white/70 truncate flex-1">{file.name}</span>
-              <span className="text-xs text-white/40 shrink-0">{formatBytes(file.size)}</span>
+              <FileIcon className="w-4 h-4 text-orange-400 shrink-0" />
+              <span className="text-sm text-(--text-secondary) truncate flex-1">{file.name}</span>
+              <span className="text-xs text-(--text-dim) shrink-0">{formatBytes(file.size)}</span>
               <button
                 onClick={() => removeFile(i)}
-                className="p-1 rounded-lg hover:bg-white/[0.08] text-white/30 hover:text-red-400 transition-all"
+                className="p-1 rounded-lg hover:bg-(--surface-4) text-(--text-dim) hover:text-red-400 transition-all"
               >
                 <X className="w-4 h-4" />
               </button>
