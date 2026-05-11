@@ -6,8 +6,7 @@ import clsx from 'clsx';
 
 const navLinks = [
   { href: '/upload', label: 'Upload', icon: Upload },
-  { href: '/text', label: 'Text', icon: FileText },
-  { href: '/retrieve', label: 'Retrieve', icon: Search },
+  { href: '/text', label: 'Editor', icon: FileText },
 ];
 
 const THEME_KEY = 'sharenova-theme';

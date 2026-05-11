@@ -3,7 +3,6 @@ import Navbar from '@/components/common/Navbar';
 import HomePage from '@/pages/Home';
 import UploadPage from '@/pages/Upload';
 import TextPage from '@/pages/Text';
-import RetrievePage from '@/pages/Retrieve';
 
 function RootLayout() {
   return (
@@ -23,7 +22,6 @@ export const router = createBrowserRouter([
       { path: '/', element: <HomePage /> },
       { path: '/upload', element: <UploadPage /> },
       { path: '/text', element: <TextPage /> },
-      { path: '/retrieve', element: <RetrievePage /> },
     ],
   },
 ]);
