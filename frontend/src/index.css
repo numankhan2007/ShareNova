@@ -1,15 +1,96 @@
 @import "tailwindcss";
 
 :root {
+  color-scheme: dark;
   --bg-primary: #0a0a14;
   --bg-secondary: #12121e;
-  --accent-violet: #8b5cf6;
-  --accent-fuchsia: #d946ef;
+  --surface-1: rgba(255, 255, 255, 0.02);
+  --surface-2: rgba(255, 255, 255, 0.04);
+  --surface-3: rgba(255, 255, 255, 0.06);
+  --surface-4: rgba(255, 255, 255, 0.08);
+  --border-subtle: rgba(255, 255, 255, 0.06);
+  --border-soft: rgba(255, 255, 255, 0.08);
+  --border-strong: rgba(255, 255, 255, 0.12);
+  --border-stronger: rgba(255, 255, 255, 0.15);
+  --text-primary: #f8fafc;
+  --text-secondary: rgba(248, 250, 252, 0.7);
+  --text-muted: rgba(248, 250, 252, 0.5);
+  --text-dim: rgba(248, 250, 252, 0.35);
+  --text-faint: rgba(248, 250, 252, 0.2);
+  --text-placeholder: rgba(248, 250, 252, 0.2);
+  --nav-bg: rgba(10, 10, 20, 0.7);
+  --nav-border: rgba(255, 255, 255, 0.06);
+  --nav-text: #f8fafc;
+  --nav-text-muted: rgba(248, 250, 252, 0.5);
+  --nav-active-bg: rgba(255, 255, 255, 0.08);
+  --nav-pill-bg: rgba(255, 255, 255, 0.06);
+  --nav-pill-border: rgba(255, 255, 255, 0.08);
+  --nav-pill-hover: rgba(255, 255, 255, 0.12);
+  --accent-violet: #f97316;
+  --accent-fuchsia: #f59e0b;
+  --accent-ring: rgba(249, 115, 22, 0.35);
+  --accent-ring-glow: rgba(249, 115, 22, 0.18);
+  --accent-surface: rgba(249, 115, 22, 0.08);
+  --scrollbar-thumb: rgba(249, 115, 22, 0.35);
+  --selection-bg: rgba(249, 115, 22, 0.25);
+  --selection-text: #ffffff;
+  --noise-opacity: 0.03;
+  --hero-text-from: #fdba74;
+  --hero-text-via: #fb923c;
+  --hero-text-to: rgba(249, 115, 22, 0.4);
+  --stat-text-from: #ffffff;
+  --stat-text-to: rgba(255, 255, 255, 0.5);
+  --divider-line: rgba(255, 255, 255, 0.08);
+  --step-number: rgba(255, 255, 255, 0.04);
+  --step-number-hover: rgba(255, 255, 255, 0.08);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg-primary: #f8fafc;
+  --bg-secondary: #f1f5f9;
+  --surface-1: rgba(15, 23, 42, 0.02);
+  --surface-2: rgba(15, 23, 42, 0.04);
+  --surface-3: rgba(15, 23, 42, 0.06);
+  --surface-4: rgba(15, 23, 42, 0.08);
+  --border-subtle: rgba(15, 23, 42, 0.08);
+  --border-soft: rgba(15, 23, 42, 0.12);
+  --border-strong: rgba(15, 23, 42, 0.18);
+  --border-stronger: rgba(15, 23, 42, 0.24);
+  --text-primary: #0f172a;
+  --text-secondary: rgba(15, 23, 42, 0.7);
+  --text-muted: rgba(15, 23, 42, 0.55);
+  --text-dim: rgba(15, 23, 42, 0.4);
+  --text-faint: rgba(15, 23, 42, 0.3);
+  --text-placeholder: rgba(15, 23, 42, 0.35);
+  --nav-bg: rgba(255, 255, 255, 0.85);
+  --nav-border: rgba(15, 23, 42, 0.08);
+  --nav-text: #0f172a;
+  --nav-text-muted: rgba(15, 23, 42, 0.6);
+  --nav-active-bg: rgba(15, 23, 42, 0.06);
+  --nav-pill-bg: rgba(15, 23, 42, 0.05);
+  --nav-pill-border: rgba(15, 23, 42, 0.1);
+  --nav-pill-hover: rgba(15, 23, 42, 0.12);
+  --accent-ring: rgba(249, 115, 22, 0.35);
+  --accent-ring-glow: rgba(249, 115, 22, 0.22);
+  --accent-surface: rgba(249, 115, 22, 0.12);
+  --scrollbar-thumb: rgba(249, 115, 22, 0.45);
+  --selection-bg: rgba(249, 115, 22, 0.2);
+  --selection-text: #0f172a;
+  --noise-opacity: 0.02;
+  --hero-text-from: #fb923c;
+  --hero-text-via: #f97316;
+  --hero-text-to: rgba(249, 115, 22, 0.45);
+  --stat-text-from: #0f172a;
+  --stat-text-to: rgba(15, 23, 42, 0.6);
+  --divider-line: rgba(15, 23, 42, 0.12);
+  --step-number: rgba(15, 23, 42, 0.05);
+  --step-number-hover: rgba(15, 23, 42, 0.12);
 }
 
 * {
   scrollbar-width: thin;
-  scrollbar-color: rgba(139, 92, 246, 0.3) transparent;
+  scrollbar-color: var(--scrollbar-thumb) transparent;
 }
 
 *::-webkit-scrollbar {
@@ -21,17 +102,18 @@
 }
 
 *::-webkit-scrollbar-thumb {
-  background: rgba(139, 92, 246, 0.3);
+  background: var(--scrollbar-thumb);
   border-radius: 3px;
 }
 
 ::selection {
-  background: rgba(139, 92, 246, 0.3);
-  color: white;
+  background: var(--selection-bg);
+  color: var(--selection-text);
 }
 
 body {
   background: var(--bg-primary);
+  color: var(--text-primary);
   overflow-x: hidden;
 }
 
@@ -40,7 +122,7 @@ body::before {
   position: fixed;
   inset: 0;
   z-index: -1;
-  opacity: 0.03;
+  opacity: var(--noise-opacity);
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-repeat: repeat;
   pointer-events: none;

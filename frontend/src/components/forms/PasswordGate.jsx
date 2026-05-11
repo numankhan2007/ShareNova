@@ -22,17 +22,17 @@ export default function PasswordGate({ onVerify, isLoading }) {
       <div className="w-16 h-16 mx-auto mb-6 rounded-2xl bg-gradient-to-br from-amber-500/20 to-orange-500/20 flex items-center justify-center border border-amber-500/20">
         <ShieldCheck className="w-7 h-7 text-amber-400" />
       </div>
-      <h2 className="text-xl font-semibold text-white mb-2">Password Protected</h2>
-      <p className="text-sm text-white/50 mb-6">This share requires a password to access.</p>
+      <h2 className="text-xl font-semibold text-(--text-primary) mb-2">Password Protected</h2>
+      <p className="text-sm text-(--text-muted) mb-6">This share requires a password to access.</p>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div className="relative">
-          <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30" />
+          <Lock className="absolute left-4 top-1/2 -translate-y-1/2 w-4 h-4 text-(--text-dim)" />
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
             placeholder="Enter password"
-            className="w-full bg-white/[0.04] border border-white/[0.08] rounded-xl pl-11 pr-4 py-3.5 text-white placeholder:text-white/20 focus:outline-none focus:border-violet-500/30 transition-all"
+            className="w-full bg-(--surface-2) border border-(--border-soft) rounded-xl pl-11 pr-4 py-3.5 text-(--text-primary) placeholder:text-(--text-placeholder) focus:outline-none focus:border-orange-500/30 transition-all"
             autoFocus
           />
         </div>
@@ -40,7 +40,7 @@ export default function PasswordGate({ onVerify, isLoading }) {
         <button
           type="submit"
           disabled={!password || isLoading}
-          className="w-full py-3.5 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-medium disabled:opacity-40 hover:shadow-lg hover:shadow-violet-500/25 transition-all"
+          className="w-full py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-medium disabled:opacity-40 hover:shadow-lg hover:shadow-orange-500/25 transition-all"
         >
           {isLoading ? 'Verifying...' : 'Unlock'}
         </button>

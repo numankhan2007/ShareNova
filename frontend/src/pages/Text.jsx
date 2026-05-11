@@ -68,15 +68,15 @@ export default function TextPage() {
           {state === 'done' && uid ? (
             <>
               <UIDDisplay uid={uid} expiresAt={expiresAt} />
-              <button onClick={reset} className="w-full py-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/60 hover:bg-white/[0.08] hover:text-white transition-all text-sm font-medium">
+              <button onClick={reset} className="w-full py-3.5 rounded-xl bg-(--surface-2) border border-(--border-soft) text-(--text-muted) hover:bg-(--surface-4) hover:text-(--text-primary) transition-all text-sm font-medium">
                 Create another
               </button>
             </>
           ) : (
             <>
               <div className="text-center">
-                <h1 className="text-3xl font-bold text-white mb-2">Share Text</h1>
-                <p className="text-white/50">Paste code, notes, or any text and get a share code.</p>
+                <h1 className="text-3xl font-bold text-(--text-primary) mb-2">Share Text</h1>
+                <p className="text-(--text-muted)">Paste code, notes, or any text and get a share code.</p>
               </div>
 
               <div className="space-y-4">
@@ -85,20 +85,20 @@ export default function TextPage() {
                   value={title}
                   onChange={(e) => setTitle(e.target.value)}
                   placeholder="Title (optional)"
-                  className="w-full bg-white/[0.04] border border-white/[0.06] rounded-xl px-4 py-3 text-white placeholder:text-white/20 focus:outline-none focus:border-violet-500/30 transition-all"
+                  className="w-full bg-(--surface-2) border border-(--border-subtle) rounded-xl px-4 py-3 text-(--text-primary) placeholder:text-(--text-placeholder) focus:outline-none focus:border-orange-500/30 transition-all"
                 />
 
                 <div className="flex gap-3">
                   <select
                     value={language}
                     onChange={(e) => setLanguage(e.target.value)}
-                    className="bg-white/[0.04] border border-white/[0.06] rounded-xl px-4 py-2.5 text-sm text-white/70 focus:outline-none focus:border-violet-500/30"
+                    className="bg-(--surface-2) border border-(--border-subtle) rounded-xl px-4 py-2.5 text-sm text-(--text-secondary) focus:outline-none focus:border-orange-500/30"
                   >
                     {SUPPORTED_LANGUAGES.map((lang) => (
-                      <option key={lang} value={lang} className="bg-[#12121e]">{lang}</option>
+                      <option key={lang} value={lang} className="bg-(--bg-secondary) text-(--text-primary)">{lang}</option>
                     ))}
                   </select>
-                  <span className="text-xs text-white/30 self-center">
+                  <span className="text-xs text-(--text-dim) self-center">
                     {content.length.toLocaleString()} / {MAX_TEXT_SIZE.toLocaleString()}
                   </span>
                 </div>
@@ -108,12 +108,12 @@ export default function TextPage() {
                   onChange={(e) => setContent(e.target.value.slice(0, MAX_TEXT_SIZE))}
                   placeholder="Paste your text here..."
                   rows={12}
-                  className="w-full bg-white/[0.03] border border-white/[0.06] rounded-xl px-5 py-4 text-sm font-mono text-white/80 placeholder:text-white/20 focus:outline-none focus:border-violet-500/30 transition-all resize-none leading-relaxed"
+                  className="w-full bg-(--surface-1) border border-(--border-subtle) rounded-xl px-5 py-4 text-sm font-mono text-(--text-secondary) placeholder:text-(--text-placeholder) focus:outline-none focus:border-orange-500/30 transition-all resize-none leading-relaxed"
                 />
               </div>
 
-              <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-4">
-                <h3 className="text-sm font-medium text-white/70">Share Options</h3>
+              <div className="p-5 rounded-2xl bg-(--surface-1) border border-(--border-subtle) space-y-4">
+                <h3 className="text-sm font-medium text-(--text-secondary)">Share Options</h3>
                 <ShareOptionsForm options={options} onChange={setOptions} />
               </div>
 
@@ -122,7 +122,7 @@ export default function TextPage() {
               <button
                 onClick={handleSubmit}
                 disabled={!content.trim() || state === 'submitting'}
-                className="w-full flex items-center justify-center gap-3 py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-medium disabled:opacity-50 hover:shadow-xl hover:shadow-violet-500/25 transition-all hover:scale-[1.01] active:scale-[0.99]"
+                className="w-full flex items-center justify-center gap-3 py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-medium disabled:opacity-50 hover:shadow-xl hover:shadow-orange-500/25 transition-all hover:scale-[1.01] active:scale-[0.99]"
               >
                 {state === 'submitting' ? <Loader2 className="w-5 h-5 animate-spin" /> : <FileText className="w-5 h-5" />}
                 {state === 'submitting' ? 'Creating...' : 'Create & Get Code'}

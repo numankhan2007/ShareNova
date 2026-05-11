@@ -32,16 +32,16 @@ export default function UIDInput({ onSubmit, isLoading }) {
       <motion.div
         animate={{
           borderColor: isFocused
-            ? 'rgba(139, 92, 246, 0.3)'
-            : 'rgba(255, 255, 255, 0.06)',
+            ? 'var(--accent-ring)'
+            : 'var(--border-subtle)',
           boxShadow: isFocused
-            ? '0 0 30px rgba(139, 92, 246, 0.1)'
+            ? '0 0 30px var(--accent-ring-glow)'
             : '0 0 0px transparent',
         }}
-        className="relative flex items-center rounded-2xl border bg-white/[0.03] backdrop-blur-xl overflow-hidden"
+        className="relative flex items-center rounded-2xl border border-(--border-subtle) bg-(--surface-1) backdrop-blur-xl overflow-hidden"
       >
         <div className="pl-5">
-          <Search className="w-5 h-5 text-white/30" />
+          <Search className="w-5 h-5 text-(--text-dim)" />
         </div>
         <input
           ref={inputRef}
@@ -52,13 +52,13 @@ export default function UIDInput({ onSubmit, isLoading }) {
           onBlur={() => setIsFocused(false)}
           placeholder="0000 0000 0000"
           maxLength={14}
-          className="flex-1 bg-transparent px-4 py-5 text-2xl font-mono tracking-[0.2em] text-white placeholder:text-white/20 focus:outline-none text-center"
+          className="flex-1 bg-transparent px-4 py-5 text-2xl font-mono tracking-[0.2em] text-(--text-primary) placeholder:text-(--text-placeholder) focus:outline-none text-center"
           autoComplete="off"
         />
         <button
           type="submit"
           disabled={!isValid || isLoading}
-          className="mr-3 p-3 rounded-xl bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-violet-500/25 transition-all hover:scale-105 active:scale-95"
+          className="mr-3 p-3 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white disabled:opacity-30 disabled:cursor-not-allowed hover:shadow-lg hover:shadow-orange-500/25 transition-all hover:scale-105 active:scale-95"
         >
           {isLoading ? (
             <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin" />
@@ -67,7 +67,7 @@ export default function UIDInput({ onSubmit, isLoading }) {
           )}
         </button>
       </motion.div>
-      <p className="text-center text-sm text-white/30 mt-3">
+      <p className="text-center text-sm text-(--text-dim) mt-3">
         Enter the 12-digit share code to retrieve files or text
       </p>
     </form>
