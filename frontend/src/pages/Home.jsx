@@ -67,48 +67,6 @@ function GlowText() {
     </h1>
   );
 }
-
-// ─── Floating particle background ───────────────────────
-
-function FloatingOrbs() {
-  const orbs = [
-    { size: 300, x: '15%', y: '20%', color: 'orange', delay: 0 },
-    { size: 400, x: '75%', y: '30%', color: 'amber', delay: 2 },
-    { size: 200, x: '50%', y: '70%', color: 'cyan', delay: 4 },
-    { size: 250, x: '85%', y: '75%', color: 'orange', delay: 1 },
-    { size: 150, x: '10%', y: '80%', color: 'amber', delay: 3 },
-  ];
-
-  const colorMap = {
-    orange: 'bg-orange-500/[0.06]',
-    amber: 'bg-amber-500/[0.05]',
-    cyan: 'bg-cyan-500/[0.04]',
-  };
-
-  return (
-    <div className="absolute inset-0 overflow-hidden pointer-events-none">
-      {orbs.map((orb, i) => (
-        <motion.div
-          key={i}
-          className={`absolute rounded-full blur-3xl ${colorMap[orb.color]}`}
-          style={{ width: orb.size, height: orb.size, left: orb.x, top: orb.y }}
-          animate={{
-            y: [0, -30, 0, 20, 0],
-            x: [0, 15, 0, -15, 0],
-            scale: [1, 1.1, 1, 0.95, 1],
-          }}
-          transition={{
-            duration: 12 + i * 2,
-            repeat: Infinity,
-            ease: 'easeInOut',
-            delay: orb.delay,
-          }}
-        />
-      ))}
-    </div>
-  );
-}
-
 // ─── Animated counter ───────────────────────────────────
 
 function AnimatedStat({ value, label, delay }) {
@@ -179,8 +137,6 @@ function FeatureCard({ icon: Icon, title, description, gradient, delay }) {
 export default function HomePage() {
   return (
     <div className="min-h-[calc(100vh-4rem)] flex flex-col items-center relative overflow-hidden">
-      <FloatingOrbs />
-
       {/* Hero Section */}
       <section className="relative z-10 flex flex-col items-center justify-center text-center px-6 pt-24 pb-20 max-w-5xl mx-auto">
         {/* Badge */}
@@ -242,137 +198,9 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* Divider line */}
-      <motion.div
-        initial={{ scaleX: 0 }}
-        animate={{ scaleX: 1 }}
-        transition={{ delay: 2, duration: 1, ease: [0.19, 1, 0.22, 1] }}
-        className="w-full max-w-4xl mx-auto h-px bg-gradient-to-r from-transparent via-(--divider-line) to-transparent"
-      />
-<<<<<<< HEAD
-=======
-
-      {/* How It Works */}
-      <section className="relative z-10 px-6 py-20 max-w-5xl mx-auto w-full">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          transition={{ duration: 0.6 }}
-          className="text-center mb-14"
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-(--text-primary) mb-4">
-            How it{' '}
-            <span className="bg-gradient-to-r from-orange-400 to-amber-400 bg-clip-text text-transparent">
-              works
-            </span>
-          </h2>
-          <p className="text-(--text-muted) max-w-lg mx-auto">
-            Three simple steps. No sign-ups, no emails, no complicated setups.
-          </p>
-        </motion.div>
-
-        <div className="grid sm:grid-cols-3 gap-6">
-          {[
-            { step: '01', title: 'Upload or Paste', desc: 'Drop your files or paste text. Set an expiry time and optional password.', icon: Upload },
-            { step: '02', title: 'Get Your Code', desc: 'Receive a unique 12-digit code. Share it with anyone who needs access.', icon: Lock },
-            { step: '03', title: 'Retrieve Securely', desc: 'Enter the code to instantly access the shared content. It auto-deletes.', icon: Download },
-          ].map(({ step, title, desc, icon: Icon }, i) => (
-            <motion.div
-              key={step}
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true }}
-              transition={{ delay: i * 0.15, duration: 0.6 }}
-              className="relative p-6 rounded-2xl bg-(--surface-1) border border-(--border-subtle) group hover:border-(--border-strong) transition-all"
-            >
-              <div className="text-5xl font-black text-(--step-number) absolute top-4 right-5 group-hover:text-(--step-number-hover) transition-colors">
-                {step}
-              </div>
-              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-orange-500/15 to-amber-500/15 flex items-center justify-center mb-4">
-                <Icon className="w-5 h-5 text-orange-400" />
-              </div>
-              <h3 className="text-(--text-primary) font-semibold mb-2">{title}</h3>
-              <p className="text-sm text-(--text-muted) leading-relaxed">{desc}</p>
-            </motion.div>
-          ))}
-        </div>
-      </section>
-
-      {/* Features */}
-      <section className="relative z-10 px-6 py-20 max-w-5xl mx-auto w-full">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="text-center mb-14"
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-(--text-primary) mb-4">
-            Built for{' '}
-            <span className="bg-gradient-to-r from-cyan-400 to-orange-400 bg-clip-text text-transparent">
-              privacy
-            </span>
-          </h2>
-          <p className="text-(--text-muted) max-w-lg mx-auto">
-            Every decision is made with your security in mind.
-          </p>
-        </motion.div>
-
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
-          <FeatureCard icon={Shield} title="Zero Knowledge" description="We never see your data. Files are stored with encryption and auto-deleted on expiry." gradient="from-orange-500/[0.03] to-amber-500/[0.02]" delay={1.8} />
-          <FeatureCard icon={Clock} title="Auto Expiry" description="Set shares to expire in 1 hour to 30 days. No data lingers on our servers forever." gradient="from-cyan-500/[0.03] to-blue-500/[0.02]" delay={1.9} />
-          <FeatureCard icon={Lock} title="Password Protection" description="Add an optional password. Recipients must verify before accessing content." gradient="from-amber-500/[0.03] to-orange-500/[0.02]" delay={2.0} />
-          <FeatureCard icon={Zap} title="Instant Transfer" description="No waiting, no queues. Upload completes in seconds with instant code generation." gradient="from-emerald-500/[0.03] to-teal-500/[0.02]" delay={2.1} />
-          <FeatureCard icon={EyeOff} title="No Tracking" description="No accounts, no cookies, no analytics. We don't know who you are." gradient="from-rose-500/[0.03] to-pink-500/[0.02]" delay={2.2} />
-          <FeatureCard icon={Eye} title="UID Only Access" description="Content is accessible only via the exact 12-digit code. No guessable URLs." gradient="from-amber-500/[0.03] to-orange-500/[0.02]" delay={2.3} />
-        </div>
-      </section>
-
-      {/* Stats */}
-      <motion.section
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        className="relative z-10 px-6 py-16 max-w-4xl mx-auto w-full"
-      >
-        <div className="p-8 rounded-3xl bg-gradient-to-br from-orange-500/[0.06] to-amber-500/[0.04] border border-(--border-subtle) backdrop-blur-sm">
-          <div className="grid grid-cols-3 gap-8">
-            <AnimatedStat value="500" label="MB Max Upload" delay={2400} />
-            <AnimatedStat value="20" label="Files Per Share" delay={2600} />
-            <AnimatedStat value="12" label="Digit Secure Code" delay={2800} />
-          </div>
-        </div>
-      </motion.section>
-
-      {/* Final CTA */}
-      <section className="relative z-10 px-6 py-20 text-center max-w-3xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          viewport={{ once: true }}
-          className="space-y-6"
-        >
-          <h2 className="text-3xl sm:text-4xl font-bold text-(--text-primary)">
-            Ready to share securely?
-          </h2>
-          <p className="text-(--text-muted)">
-            No sign-ups required. Start sharing in seconds.
-          </p>
-          <div className="flex justify-center gap-4">
-            <Link
-              to="/upload"
-              className="px-8 py-3.5 rounded-xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-medium hover:shadow-xl hover:shadow-orange-500/25 transition-all hover:scale-105 active:scale-95"
-            >
-              Start Sharing
-            </Link>
-          </div>
-        </motion.div>
-      </section>
-
->>>>>>> 53b1ece618f06ed872cd58a861a06970740760f7
       {/* Footer gradient */}
-      <div className="w-full h-px bg-gradient-to-r from-transparent via-(--divider-line) to-transparent" />
-      <footer className="relative z-10 px-6 py-8 text-center">
+      <div className="absolute bottom-20 w-full h-px bg-gradient-to-r from-transparent via-(--divider-line) to-transparent" />
+      <footer className="absolute bottom-0 w-full z-10 px-6 py-8 text-center">
         <p className="text-xs text-(--text-faint)">ShareNova — Secure Temporary Sharing</p>
       </footer>
     </div>

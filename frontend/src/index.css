@@ -59,7 +59,7 @@
   --border-stronger: rgba(15, 23, 42, 0.24);
   --text-primary: #0f172a;
   --text-secondary: rgba(15, 23, 42, 0.7);
-  --text-muted: rgba(15, 23, 42, 0.55);
+  --text-muted: rgba(0, 0, 0, 0.7);
   --text-dim: rgba(15, 23, 42, 0.4);
   --text-faint: rgba(15, 23, 42, 0.3);
   --text-placeholder: rgba(15, 23, 42, 0.35);

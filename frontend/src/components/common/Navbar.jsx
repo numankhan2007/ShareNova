@@ -41,7 +41,7 @@ export default function Navbar() {
           <div className="relative w-8 h-8 rounded-lg bg-gradient-to-br from-orange-500 to-amber-500 flex items-center justify-center shadow-lg shadow-orange-500/20 group-hover:shadow-orange-500/40 transition-shadow">
             <Sparkles className="w-4 h-4 text-white" />
           </div>
-          <span className="text-lg font-bold bg-gradient-to-r from-(--nav-text) to-(--nav-text-muted) bg-clip-text text-transparent">
+          <span className="text-lg font-bold bg-gradient-to-r from-(--nav-text) to-(--nav-text-muted) bg-clip-text">
             ShareNova
           </span>
         </Link>
