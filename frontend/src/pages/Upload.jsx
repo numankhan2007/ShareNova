@@ -74,23 +74,23 @@ export default function UploadPage() {
           {state === 'done' && uid ? (
             <>
               <UIDDisplay uid={uid} expiresAt={expiresAt} />
-              <button onClick={reset} className="w-full py-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/60 hover:bg-white/[0.08] hover:text-white transition-all text-sm font-medium">
+              <button onClick={reset} className="w-full py-3.5 rounded-xl bg-(--surface-2) border border-(--border-soft) text-(--text-muted) hover:bg-(--surface-4) hover:text-(--text-primary) transition-all text-sm font-medium">
                 Share more files
               </button>
             </>
           ) : (
             <>
               <div className="text-center">
-                <h1 className="text-3xl font-bold text-white mb-2">Upload Files</h1>
-                <p className="text-white/50">Drop your files and get a secure share code.</p>
+                <h1 className="text-3xl font-bold text-(--text-primary) mb-2">Upload Files</h1>
+                <p className="text-(--text-muted)">Drop your files and get a secure share code.</p>
               </div>
 
               <DropZone files={files} onFilesChange={setFiles} />
 
               {files.length > 0 && (
                 <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} className="space-y-6">
-                  <div className="p-5 rounded-2xl bg-white/[0.02] border border-white/[0.06] space-y-4">
-                    <h3 className="text-sm font-medium text-white/70">Share Options</h3>
+                  <div className="p-5 rounded-2xl bg-(--surface-1) border border-(--border-subtle) space-y-4">
+                    <h3 className="text-sm font-medium text-(--text-secondary)">Share Options</h3>
                     <ShareOptionsForm options={options} onChange={setOptions} />
                   </div>
 
@@ -100,7 +100,7 @@ export default function UploadPage() {
                   <button
                     onClick={handleUpload}
                     disabled={state === 'uploading'}
-                    className="w-full flex items-center justify-center gap-3 py-4 rounded-2xl bg-gradient-to-r from-violet-600 to-fuchsia-600 text-white font-medium disabled:opacity-50 hover:shadow-xl hover:shadow-violet-500/25 transition-all hover:scale-[1.01] active:scale-[0.99]"
+                    className="w-full flex items-center justify-center gap-3 py-4 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-medium disabled:opacity-50 hover:shadow-xl hover:shadow-orange-500/25 transition-all hover:scale-[1.01] active:scale-[0.99]"
                   >
                     {state === 'uploading' ? <Loader2 className="w-5 h-5 animate-spin" /> : <UploadIcon className="w-5 h-5" />}
                     {state === 'uploading' ? 'Uploading...' : 'Upload & Get Code'}

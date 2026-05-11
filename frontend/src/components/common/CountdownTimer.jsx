@@ -44,7 +44,7 @@ export default function CountdownTimer({ expiresAt }) {
       className={`inline-flex items-center gap-2 px-3 py-1.5 rounded-full text-xs font-medium ${
         isExpired
           ? 'bg-red-500/10 text-red-400 border border-red-500/20'
-          : 'bg-white/[0.04] text-white/60 border border-white/[0.06]'
+          : 'bg-(--surface-2) text-(--text-muted) border border-(--border-subtle)'
       }`}
     >
       <Clock className="w-3 h-3" />

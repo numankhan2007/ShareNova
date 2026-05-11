@@ -17,8 +17,8 @@ export default function FileShareView({ share, sessionToken }) {
     >
       <div className="flex items-center justify-between">
         <div>
-          <h2 className="text-xl font-semibold text-white">Shared Files</h2>
-          <p className="text-sm text-white/50 mt-1">
+          <h2 className="text-xl font-semibold text-(--text-primary)">Shared Files</h2>
+          <p className="text-sm text-(--text-muted) mt-1">
             {share.fileCount} file{(share.fileCount || 0) > 1 ? 's' : ''} · {formatBytes(share.totalSize)}
           </p>
         </div>
@@ -33,16 +33,16 @@ export default function FileShareView({ share, sessionToken }) {
             initial={{ opacity: 0, x: -20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ delay: i * 0.05 }}
-            className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.03] border border-white/[0.06] hover:bg-white/[0.06] transition-all group"
+            className="flex items-center gap-4 p-4 rounded-xl bg-(--surface-1) border border-(--border-subtle) hover:bg-(--surface-3) transition-all group"
           >
-            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-violet-500/10 to-fuchsia-500/10 flex items-center justify-center shrink-0">
-              <FileIcon className="w-5 h-5 text-violet-400" />
+            <div className="w-11 h-11 rounded-xl bg-gradient-to-br from-orange-500/10 to-amber-500/10 flex items-center justify-center shrink-0">
+              <FileIcon className="w-5 h-5 text-orange-400" />
             </div>
             <div className="flex-1 min-w-0">
-              <p className="text-sm font-medium text-white/80 truncate">{file.filename}</p>
-              <p className="text-xs text-white/40">{formatBytes(file.size)} · {file.mimeType}</p>
+              <p className="text-sm font-medium text-(--text-secondary) truncate">{file.filename}</p>
+              <p className="text-xs text-(--text-dim)">{formatBytes(file.size)} · {file.mimeType}</p>
             </div>
-            <Download className="w-4 h-4 text-white/30 group-hover:text-violet-400 transition-colors shrink-0" />
+            <Download className="w-4 h-4 text-(--text-dim) group-hover:text-orange-400 transition-colors shrink-0" />
           </motion.a>
         ))}
       </div>
@@ -50,7 +50,7 @@ export default function FileShareView({ share, sessionToken }) {
       {(share.fileCount || 0) > 1 && (
         <a
           href={getZipDownloadUrl(share.uid)}
-          className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-white/[0.04] border border-white/[0.08] text-white/70 hover:bg-white/[0.08] hover:text-white transition-all text-sm font-medium"
+          className="flex items-center justify-center gap-2 w-full py-3.5 rounded-xl bg-(--surface-2) border border-(--border-soft) text-(--text-secondary) hover:bg-(--surface-4) hover:text-(--text-primary) transition-all text-sm font-medium"
         >
           <Archive className="w-4 h-4" />
           Download all as ZIP

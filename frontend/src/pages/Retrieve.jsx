@@ -76,8 +76,8 @@ export default function RetrievePage() {
       <div className="w-full max-w-2xl">
         <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} className="space-y-8">
           <div className="text-center">
-            <h1 className="text-3xl font-bold text-white mb-2">Retrieve a Share</h1>
-            <p className="text-white/50">Enter the 12-digit code to access shared content.</p>
+            <h1 className="text-3xl font-bold text-(--text-primary) mb-2">Retrieve a Share</h1>
+            <p className="text-(--text-muted)">Enter the 12-digit code to access shared content.</p>
           </div>
 
           <UIDInput onSubmit={handleUIDSubmit} isLoading={isLoading} />

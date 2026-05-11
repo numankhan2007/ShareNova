@@ -29,10 +29,10 @@ export default function UIDDisplay({ uid, expiresAt }) {
       initial={{ opacity: 0, y: 20, scale: 0.95 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
       transition={{ duration: 0.5, ease: [0.19, 1, 0.22, 1] }}
-      className="relative overflow-hidden rounded-2xl border border-white/[0.08] bg-white/[0.03] backdrop-blur-xl p-8"
+      className="relative overflow-hidden rounded-2xl border border-(--border-soft) bg-(--surface-1) backdrop-blur-xl p-8"
     >
-      <div className="absolute inset-0 bg-gradient-to-br from-violet-500/[0.05] to-fuchsia-500/[0.05]" />
-      <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-violet-500/10 blur-3xl" />
+      <div className="absolute inset-0 bg-gradient-to-br from-orange-500/5 to-amber-500/5" />
+      <div className="absolute -top-24 -right-24 w-48 h-48 rounded-full bg-orange-500/10 blur-3xl" />
 
       <div className="relative space-y-6 text-center">
         <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-400 text-xs font-medium border border-emerald-500/20">
@@ -41,28 +41,28 @@ export default function UIDDisplay({ uid, expiresAt }) {
         </div>
 
         <div>
-          <p className="text-sm text-white/50 mb-3">Your Share Code</p>
+          <p className="text-sm text-(--text-muted) mb-3">Your Share Code</p>
           <div className="flex items-center justify-center gap-3">
-            <span className="text-4xl sm:text-5xl font-mono font-bold tracking-[0.15em] text-white">
+            <span className="text-4xl sm:text-5xl font-mono font-bold tracking-[0.15em] text-(--text-primary)">
               {formatUID(uid)}
             </span>
             <button
               onClick={copyToClipboard}
-              className="p-3 rounded-xl bg-white/[0.06] border border-white/[0.08] hover:bg-white/[0.1] transition-all hover:scale-105 active:scale-95"
+              className="p-3 rounded-xl bg-(--surface-3) border border-(--border-soft) hover:bg-(--surface-4) transition-all hover:scale-105 active:scale-95"
               title="Copy UID"
             >
               {copied ? (
                 <Check className="w-5 h-5 text-emerald-400" />
               ) : (
-                <Copy className="w-5 h-5 text-white/60" />
+                <Copy className="w-5 h-5 text-(--text-muted)" />
               )}
             </button>
           </div>
         </div>
 
-        <p className="text-sm text-white/40 max-w-md mx-auto">
+        <p className="text-sm text-(--text-dim) max-w-md mx-auto">
           Share this code with anyone who needs access. They can retrieve your files at the{' '}
-          <span className="text-violet-400">Retrieve</span> page.
+          <span className="text-orange-400">Retrieve</span> page.
         </p>
 
         {expiresAt && (
