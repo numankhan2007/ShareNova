@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Upload, Download, Shield, Clock, Zap, Lock, Sparkles, ArrowRight, Eye, EyeOff } from 'lucide-react';
+import EditorConfigModal from '@/components/editor/EditorConfigModal';
 
 // ─── Animated glowing text component ────────────────────
 
@@ -191,93 +192,12 @@ export default function HomePage() {
         </motion.div>
       </section>
 
-      {/* Quick Create Modal */}
-      <AnimatePresence>
-        {isModalOpen && (
-          <>
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              exit={{ opacity: 0 }}
-              onClick={() => setIsModalOpen(false)}
-              className="fixed inset-0 z-[60] bg-black/60 backdrop-blur-md"
-            />
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              className="fixed top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 z-[70] w-full max-w-md p-8 rounded-3xl bg-(--bg-secondary) border border-(--border-soft) shadow-2xl"
-            >
-              <h2 className="text-2xl font-bold text-(--text-primary) mb-6">Editor Config</h2>
-              
-              <div className="space-y-5">
-                <div className="space-y-2">
-                  <label className="text-xs font-semibold text-(--text-dim) uppercase tracking-wider">Title</label>
-                  <input
-                    type="text"
-                    value={modalData.title}
-                    onChange={(e) => setModalData({...modalData, title: e.target.value})}
-                    placeholder="Enter share title..."
-                    className="w-full bg-(--surface-2) border border-(--border-subtle) rounded-xl px-4 py-3 text-(--text-primary) focus:outline-none focus:border-orange-500/40 transition-all"
-                  />
-                </div>
-
-                <div className="space-y-2">
-                  <label className="text-xs font-semibold text-(--text-dim) uppercase tracking-wider">Password (Optional)</label>
-                  <input
-                    type="password"
-                    value={modalData.password}
-                    onChange={(e) => setModalData({...modalData, password: e.target.value})}
-                    placeholder="Set a password..."
-                    className="w-full bg-(--surface-2) border border-(--border-subtle) rounded-xl px-4 py-3 text-(--text-primary) focus:outline-none focus:border-orange-500/40 transition-all"
-                  />
-                </div>
-
-                <div className="flex gap-4">
-                  <div className="flex-1 space-y-2">
-                    <label className="text-xs font-semibold text-(--text-dim) uppercase tracking-wider">Duration</label>
-                    <select
-                      value={modalData.expiresIn}
-                      onChange={(e) => setModalData({...modalData, expiresIn: e.target.value})}
-                      className="w-full bg-(--surface-2) border border-(--border-subtle) rounded-xl px-4 py-3 text-(--text-secondary) focus:outline-none focus:border-orange-500/40 transition-all"
-                    >
-                      <option value="1h">1 Hour</option>
-                      <option value="6h">6 Hours</option>
-                      <option value="24h">24 Hours</option>
-                      <option value="7d">7 Days</option>
-                      <option value="30d">30 Days</option>
-                    </select>
-                  </div>
-
-                  <div className="flex-1 space-y-2">
-                    <label className="text-xs font-semibold text-(--text-dim) uppercase tracking-wider">Attachments</label>
-                    <button
-                      onClick={() => setModalData({...modalData, fileEnabled: !modalData.fileEnabled})}
-                      className={`w-full py-3 rounded-xl border transition-all font-medium flex items-center justify-center gap-2 ${
-                        modalData.fileEnabled 
-                        ? 'bg-orange-500/10 border-orange-500/30 text-orange-400' 
-                        : 'bg-(--surface-2) border-(--border-subtle) text-(--text-muted)'
-                      }`}
-                    >
-                      {modalData.fileEnabled ? <Upload className="w-4 h-4" /> : null}
-                      {modalData.fileEnabled ? 'Enabled' : 'Disabled'}
-                    </button>
-                  </div>
-                </div>
-
-                <Link
-                  to={modalData.fileEnabled ? '/upload' : '/text'}
-                  state={modalData}
-                  className="w-full flex items-center justify-center gap-3 py-4 mt-4 rounded-2xl bg-gradient-to-r from-orange-500 to-amber-500 text-white font-bold hover:shadow-xl hover:shadow-orange-500/25 transition-all active:scale-[0.98]"
-                >
-                  Proceed to Editor
-                  <ArrowRight className="w-5 h-5" />
-                </Link>
-              </div>
-            </motion.div>
-          </>
-        )}
-      </AnimatePresence>
+      <EditorConfigModal 
+        isOpen={isModalOpen} 
+        onClose={() => setIsModalOpen(false)} 
+        data={modalData} 
+        onChange={setModalData} 
+      />
 
       {/* Footer gradient */}
       <div className="absolute bottom-20 w-full h-px bg-gradient-to-r from-transparent via-(--divider-line) to-transparent" />

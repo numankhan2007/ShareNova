@@ -1,9 +1,10 @@
-import { useState } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useLocation, Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { FileText, Loader2, Sparkles, Search, Save } from 'lucide-react';
+import { FileText, Loader2, Sparkles, Search, Save, Info, X, Trash2 } from 'lucide-react';
+import { AnimatePresence, motion } from 'framer-motion';
 import ShareOptionsForm from '@/components/forms/ShareOptionsForm';
 import UIDDisplay from '@/components/share/UIDDisplay';
+import DocumentInfoDropdown from '@/components/editor/DocumentInfoDropdown';
 import { createTextShare, getShareByUID, getTextContent } from '@/lib/api';
 import { MAX_TEXT_SIZE } from '@/lib/constants';
 
@@ -22,10 +23,45 @@ export default function TextPage() {
   const [uid, setUid] = useState('');
   const [expiresAt, setExpiresAt] = useState(null);
   const [error, setError] = useState('');
+
+  // Persistent session start — captured once on mount, never resets when modal opens/closes
+  const sessionStart = useRef(null);
   
   const [search, setSearch] = useState('');
   const [searchResults, setSearchResults] = useState(null);
   const [isSearching, setIsSearching] = useState(false);
+  const [showDetails, setShowDetails] = useState(false);
+
+  // ─── Persistence Logic ───────────────────────────────────
+  useEffect(() => {
+    const saved = localStorage.getItem('sharenova_editor_state');
+    if (saved) {
+      try {
+        const parsed = JSON.parse(saved);
+        if (parsed.title) setTitle(parsed.title);
+        if (parsed.options) setOptions(parsed.options);
+        if (parsed.uid) setUid(parsed.uid);
+        if (parsed.expiresAt) setExpiresAt(parsed.expiresAt);
+        if (parsed.sessionStart) sessionStart.current = parsed.sessionStart;
+      } catch (e) {
+        console.error('Failed to load saved state', e);
+      }
+    }
+    if (!sessionStart.current) {
+      sessionStart.current = Date.now();
+    }
+  }, []);
+
+  useEffect(() => {
+    const stateToSave = {
+      title,
+      options,
+      uid,
+      expiresAt,
+      sessionStart: sessionStart.current
+    };
+    localStorage.setItem('sharenova_editor_state', JSON.stringify(stateToSave));
+  }, [title, options, uid, expiresAt]);
 
   // ─── Search Logic ─────────────────────────────────────────
   const handleSearch = async (val) => {
@@ -57,6 +93,7 @@ export default function TextPage() {
       if (contentRes.success && contentRes.data) {
         setContent(contentRes.data);
         setTitle(searchResults.title || '');
+        setExpiresAt(searchResults.expires_at || searchResults.expiresAt || null);
         setSearchResults(null);
         setSearch('');
       }
@@ -82,13 +119,7 @@ export default function TextPage() {
 
       if (res.success && res.data) {
         setUid(res.data.uid);
-        const expiryMs = {
-          '1h': 3600000, '6h': 21600000, '24h': 86400000,
-          '7d': 604800000, '30d': 2592000000,
-        };
-        if (options.expiresIn && expiryMs[options.expiresIn]) {
-          setExpiresAt(new Date(Date.now() + expiryMs[options.expiresIn]).toISOString());
-        }
+        setExpiresAt(res.data.expires_at || res.data.expiresAt || null);
         setState('done');
       } else {
         setError(res.error || 'Failed to create share');
@@ -107,6 +138,9 @@ export default function TextPage() {
     setUid('');
     setExpiresAt(null);
     setError('');
+    // Reset session start for the new session
+    sessionStart.current = Date.now();
+    localStorage.removeItem('sharenova_editor_state');
   }
 
   // Check if we are in "active editing" mode (from home or loaded)
@@ -160,9 +194,34 @@ export default function TextPage() {
                 animate={{ opacity: 1, y: 0 }}
                 className="word-sheet"
               >
-                <div className="mb-8 pb-4 border-b border-(--border-soft) flex items-center justify-between">
+                <div className="mb-8 pb-4 border-b border-(--border-soft) flex items-center justify-between relative">
                   <h1 className="text-2xl text-(--text-primary)">{title || 'Untitled Document'}</h1>
-                  <span className="text-[10px] text-(--text-dim) font-mono uppercase tracking-widest">Microsoft Word Style</span>
+                  <div className='Details-con'>
+                    <button 
+                      onClick={() => setShowDetails(!showDetails)}
+                      className={`p-2 rounded-xl transition-all ${
+                        showDetails 
+                        ? 'bg-orange-500 text-white shadow-lg shadow-orange-500/20' 
+                        : 'bg-(--surface-2) text-(--text-muted) hover:bg-(--surface-3) hover:text-orange-500 border border-(--border-soft)'
+                      }`}
+                      title="Document Information & Options"
+                    >
+                      <Info className="w-5 h-5" />
+                    </button>
+
+                    <DocumentInfoDropdown 
+                      isOpen={showDetails} 
+                      onClose={() => setShowDetails(false)} 
+                      title={title} 
+                      setTitle={setTitle} 
+                      options={options} 
+                      setOptions={setOptions} 
+                      contentLength={content.length} 
+                      onClear={() => setContent('')} 
+                      expiresAt={expiresAt}
+                      sessionStart={sessionStart.current}
+                    />
+                  </div>
                 </div>
 
                 <textarea
@@ -240,12 +299,7 @@ export default function TextPage() {
           </div>
         )}
 
-        {isEditing && state === 'idle' && (
-          <div className="page-split__sidebar-card mt-auto animate-in slide-in-from-bottom-4 duration-500">
-            <span className="page-split__sidebar-label">Options</span>
-            <ShareOptionsForm options={options} onChange={setOptions} />
-          </div>
-        )}
+        {/* Options moved to Details dialog */}
       </aside>
     </div>
   );
